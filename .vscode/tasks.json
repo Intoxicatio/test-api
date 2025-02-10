@@ -1,0 +1,190 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Run Worker 1",
+            "type": "shell",
+            "command": "docker-compose",
+            "args": [
+                "exec",
+                "php",
+                "sh",
+                "-c",
+                "php artisan queue:work --queue=high --tries=3 --timeout=120 --sleep=2"
+            ],
+            "group": "build",
+            "problemMatcher": [],
+            "detail": "Run Laravel Queue Worker 1"
+        },
+        {
+            "label": "Run Worker 2",
+            "type": "shell",
+            "command": "docker-compose",
+            "args": [
+                "exec",
+                "php",
+                "sh",
+                "-c",
+                "php artisan queue:work --queue=high --tries=3 --timeout=120 --sleep=2"
+            ],
+            "group": "build",
+            "problemMatcher": [],
+            "detail": "Run Laravel Queue Worker 2"
+        },
+        {
+            "label": "Run Worker 3",
+            "type": "shell",
+            "command": "docker-compose",
+            "args": [
+                "exec",
+                "php",
+                "sh",
+                "-c",
+                "php artisan queue:work --queue=high --tries=3 --timeout=120 --sleep=2"
+            ],
+            "group": "build",
+            "problemMatcher": [],
+            "detail": "Run Laravel Queue Worker 3"
+        },
+        {
+            "label": "Run Worker 4",
+            "type": "shell",
+            "command": "docker-compose",
+            "args": [
+                "exec",
+                "php",
+                "sh",
+                "-c",
+                "php artisan queue:work --queue=low --tries=3 --timeout=120 --sleep=2"
+            ],
+            "group": "build",
+            "problemMatcher": [],
+            "detail": "Run Laravel Queue Worker 4"
+        },
+        {
+            "label": "Run Worker 5",
+            "type": "shell",
+            "command": "docker-compose",
+            "args": [
+                "exec",
+                "php",
+                "sh",
+                "-c",
+                "php artisan queue:work --queue=low --tries=3 --timeout=120 --sleep=2"
+            ],
+            "group": "build",
+            "problemMatcher": [],
+            "detail": "Run Laravel Queue Worker 5"
+        },
+        {
+            "label": "Run Worker 6",
+            "type": "shell",
+            "command": "docker-compose",
+            "args": [
+                "exec",
+                "php",
+                "sh",
+                "-c",
+                "php artisan queue:work --queue=low --tries=3 --timeout=120 --sleep=2"
+            ],
+            "group": "build",
+            "problemMatcher": [],
+            "detail": "Run Laravel Queue Worker 6"
+        },
+        {
+            "label": "Run Worker 7",
+            "type": "shell",
+            "command": "docker-compose",
+            "args": [
+                "exec",
+                "php",
+                "sh",
+                "-c",
+                "php artisan queue:work --queue=low --tries=3 --timeout=120 --sleep=2"
+            ],
+            "group": "build",
+            "problemMatcher": [],
+            "detail": "Run Laravel Queue Worker 7"
+        },
+        {
+            "label": "Run Worker 8",
+            "type": "shell",
+            "command": "docker-compose",
+            "args": [
+                "exec",
+                "php",
+                "sh",
+                "-c",
+                "php artisan queue:work --queue=low --tries=3 --timeout=120 --sleep=2"
+            ],
+            "group": "build",
+            "problemMatcher": [],
+            "detail": "Run Laravel Queue Worker 8"
+        },
+        {
+            "label": "Run Worker 9",
+            "type": "shell",
+            "command": "docker-compose",
+            "args": [
+                "exec",
+                "php",
+                "sh",
+                "-c",
+                "php artisan queue:work --queue=low --tries=3 --timeout=120 --sleep=2"
+            ],
+            "group": "build",
+            "problemMatcher": [],
+            "detail": "Run Laravel Queue Worker 9"
+        },
+        {
+            "label": "Run Worker 10",
+            "type": "shell",
+            "command": "docker-compose",
+            "args": [
+                "exec",
+                "php",
+                "sh",
+                "-c",
+                "php artisan queue:work --queue=low --tries=3 --timeout=120 --sleep=2"
+            ],
+            "group": "build",
+            "problemMatcher": [],
+            "detail": "Run Laravel Queue Worker 10"
+        },
+        {
+            "label": "Run All Workers",
+            "dependsOrder": "parallel",
+            "dependsOn": [
+                "Run Worker 1",
+                "Run Worker 2",
+                "Run Worker 3",
+                "Run Worker 4",
+                "Run Worker 5",
+                "Run Worker 6",
+                "Run Worker 7",
+                "Run Worker 8",
+                "Run Worker 9",
+                "Run Worker 10"
+            ],
+            "problemMatcher": [],
+            "group": "build",
+            "detail": "Run all Laravel Queue Workers"
+        },
+        {
+            "label": "Run 7 Workers",
+            "dependsOrder": "parallel",
+            "dependsOn": [
+                "Run Worker 1",
+                "Run Worker 2",
+                "Run Worker 6",
+                "Run Worker 7",
+                "Run Worker 8",
+                "Run Worker 9",
+                "Run Worker 10"
+            ],
+            "problemMatcher": [],
+            "group": "build",
+            "detail": "Run all Laravel Queue Workers"
+        }
+    ]
+}
