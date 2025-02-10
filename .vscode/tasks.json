@@ -152,7 +152,7 @@
             "detail": "Run Laravel Queue Worker 10"
         },
         {
-            "label": "Run All Workers",
+            "label": "Run All Workers for fetching",
             "dependsOrder": "parallel",
             "dependsOn": [
                 "Run Worker 1",
@@ -160,22 +160,6 @@
                 "Run Worker 3",
                 "Run Worker 4",
                 "Run Worker 5",
-                "Run Worker 6",
-                "Run Worker 7",
-                "Run Worker 8",
-                "Run Worker 9",
-                "Run Worker 10"
-            ],
-            "problemMatcher": [],
-            "group": "build",
-            "detail": "Run all Laravel Queue Workers"
-        },
-        {
-            "label": "Run 7 Workers",
-            "dependsOrder": "parallel",
-            "dependsOn": [
-                "Run Worker 1",
-                "Run Worker 2",
                 "Run Worker 6",
                 "Run Worker 7",
                 "Run Worker 8",
