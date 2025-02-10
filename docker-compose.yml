@@ -1,0 +1,37 @@
+services:
+  php:
+    build:
+      context: .
+      dockerfile: php.Dockerfile
+    container_name: ${PROJECT_NAME}-php
+    working_dir: /app
+    volumes:
+      - ./src:/app
+    ports:
+      - "${SERVER_PORT}:8000"
+    networks:
+      - internal
+    # command: sh -c "composer create-project laravel/laravel:^8.x-dev . && composer require laravel/octane --with-all-dependencies"
+
+  mysql:
+    image: mysql:8.0
+    container_name: ${PROJECT_NAME}-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: '${MSQL_PASSWORD}'
+      MYSQL_DATABASE: '${MSQL_DATABASE}'
+      MYSQL_USER: '${MSQL_USER}'
+      MYSQL_PASSWORD: '${MSQL_PASSWORD}'
+    ports:
+      - "${DB_PORT}:3306"
+    volumes:
+      - mysql_data:/mysql
+    networks:
+      - internal
+
+volumes:
+  mysql_data:
+    driver: local
+
+networks:
+  internal: 
+    driver: bridge
