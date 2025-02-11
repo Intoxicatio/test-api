@@ -41,7 +41,7 @@ class PutSalesJob implements ShouldQueue
     {
         $i = 0;
         foreach ($this->responseData as $data) {
-            Sale::create([
+            Sale::updateOrCreate([
                 'g_number' => $data['g_number'],
                 'date' => $data['date'],
                 'last_change_date' => $data['last_change_date'],

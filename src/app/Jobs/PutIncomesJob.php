@@ -41,7 +41,7 @@ class PutIncomesJob implements ShouldQueue
     {
         $i = 0;
         foreach ($this->responseData as $data) {
-            Income::create([
+            Income::updateOrCreate([
                 'income_id' => $data['income_id'],
                 'number' => $data['number'],
                 'date' => $data['date'],

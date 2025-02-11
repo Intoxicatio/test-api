@@ -11,6 +11,12 @@ class Sale extends Model
 
     protected $table = 'sales';
 
+    protected $hidden = [
+        'id',
+        'created_at',
+        'updated_at',
+    ];
+
     protected $fillable = [
         'g_number',
         'date',

@@ -41,7 +41,7 @@ class PutStocksJob implements ShouldQueue
     {
         $i = 0;
         foreach ($this->responseData as $data) {
-            Stock::create([
+            Stock::updateOrCreate([
                 'date' => $data['date'],
                 'last_change_date' => $data['last_change_date'],
                 'supplier_article' => $data['supplier_article'],

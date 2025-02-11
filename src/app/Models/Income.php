@@ -11,6 +11,12 @@ class Income extends Model
 
     protected $table = 'incomes';
 
+    protected $hidden = [
+        'id',
+        'created_at',
+        'updated_at',
+    ];
+
     protected $fillable = [
         'income_id',
         'number',

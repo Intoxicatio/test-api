@@ -11,6 +11,12 @@ class Stock extends Model
 
     protected $table = 'stocks';
 
+    protected $hidden = [
+        'id',
+        'created_at',
+        'updated_at',
+    ];
+
     protected $fillable = [
         'date',
         'last_change_date',

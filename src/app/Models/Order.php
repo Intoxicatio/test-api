@@ -11,6 +11,12 @@ class Order extends Model
 
     protected $table = 'orders';
 
+    protected $hidden = [
+        'id',
+        'created_at',
+        'updated_at',
+    ];
+
     protected $fillable = [
         'g_number',
         'date',
