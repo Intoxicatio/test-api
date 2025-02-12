@@ -42,9 +42,9 @@ class ConnectionJob implements ShouldQueue
 
             $response = Http::get($this->url);
             if ($response->failed()) {
-                Log::alert("Failed to fetch data, retrying... Attempt: {$attempts}");
+                Log::alert("Failed to fetch {$this->type}, retrying... Attempt: {$attempts}");
                 $attempts++;
-                sleep(10);
+                sleep(60);
             } else {
                 $success = true;
 

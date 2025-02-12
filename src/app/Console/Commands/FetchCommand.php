@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use App\Services\FetchService;
+use Illuminate\Support\Facades\Log;
 
 class FetchCommand extends Command
 {
@@ -48,12 +49,14 @@ class FetchCommand extends Command
     {
         $type = $this->argument('type');
 
+        Log::info("Fetching {$type}...\n");
+
         if (!in_array($type, ['orders', 'incomes', 'sales', 'stocks'])) {
             return $this->error('Invalid type');
         }
 
-        $output = $this->fetchService->fetch($type);
+        $this->fetchService->fetch($type);
 
-        return $this->info($output . "\n");
+        return $this->info("All {$type} start to fetching!\n");
     }
 }

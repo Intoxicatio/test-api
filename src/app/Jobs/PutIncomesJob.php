@@ -57,6 +57,6 @@ class PutIncomesJob implements ShouldQueue
             ]);
             $i++;
         }
-        Log::info("{$i} Incomes added to database");
+        return Log::info("{$i} Incomes added to database");
     }
 }

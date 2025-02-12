@@ -5,14 +5,15 @@ namespace App\Services;
 use App\Jobs\ConnectionJob;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class FetchService
 {
-    public function fetch($type): string
+    public function fetch($type)
     {
         $page = 0;
         $today = Carbon::now()->format('Y-m-d');
-        if ($type = 'stocks') {
+        if ($type === 'stocks') {
             $tommorow = Carbon::now()->addDay()->format('Y-m-d');
             $url = "89.108.115.241:6969/api/{$type}?dateFrom={$today}&dateTo={$tommorow}&limit=500&key=E6kUTYrYwZq2tN4QEtyzsbEBk3ie";
         } else {
@@ -24,6 +25,6 @@ class FetchService
             $urlu = $url . "&page={$page}";
             ConnectionJob::dispatch($type, $urlu)->onQueue(env('QUEUE_HIGH', 'high'));
         }
-        return "Data start to fetching, total pages: {$page} url: {$url}";
+        return Log::info("Data start to fetching, total pages: {$page} url: {$url}");
     }
 }

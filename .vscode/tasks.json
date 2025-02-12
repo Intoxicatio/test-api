@@ -40,7 +40,7 @@
                 "php",
                 "sh",
                 "-c",
-                "php artisan queue:work --queue=high --tries=3 --timeout=120 --sleep=2"
+                "php artisan queue:work --queue=low --tries=3 --timeout=120 --sleep=2"
             ],
             "group": "build",
             "problemMatcher": [],
