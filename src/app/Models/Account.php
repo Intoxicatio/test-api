@@ -16,6 +16,7 @@ class Account extends Authenticatable
     protected $fillable = [
         'name',
         'company_id',
+        'service_id'
     ];
 
     public function company()

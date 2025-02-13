@@ -22,6 +22,3 @@ Route::middleware('check_auth_token')->get('/orders', 'App\Http\Controllers\Api\
 Route::middleware('check_auth_token')->get('/incomes','App\Http\Controllers\Api\IncomeController@index');
 Route::middleware('check_auth_token')->get('/sales','App\Http\Controllers\Api\SaleController@index');
 Route::middleware('check_auth_token')->get('/stocks','App\Http\Controllers\Api\StockController@index');
-Route::post('/generate-token', 'App\Http\Controllers\AuthController@generateToken');
-Route::post('/login', 'App\Http\Controllers\AuthController@login')->name('login');
-Route::post('/register', 'App\Http\Controllers\AuthController@register');
