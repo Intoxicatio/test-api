@@ -16,13 +16,6 @@ RUN chmod +x /usr/local/bin/start.sh
 
 COPY root ./etc/crontabs
 
-WORKDIR /app
-
-RUN composer create-project laravel/laravel:^8.x-dev . 
-RUN composer require laravel/octane --with-all-dependencies
-
-COPY /src /app
-
 EXPOSE 8000
 
 CMD ["/bin/sh", "-c", "/usr/local/bin/start.sh"]
