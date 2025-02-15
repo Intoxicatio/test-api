@@ -52,16 +52,16 @@ class ConnectionJob implements ShouldQueue
 
             switch ($this->type) {
                 case 'orders':
-                    PutOrdersJob::dispatch($responseData)->onQueue(env('QUEUE_LOW', 'low'));
+                    PutOrdersJob::dispatch($responseData);
                     return Log::info("Success connection ---> {$this->url}");
                 case 'incomes':
-                    PutIncomesJob::dispatch($responseData)->onQueue(env('QUEUE_LOW', 'low'));
+                    PutIncomesJob::dispatch($responseData);
                     return Log::info("Success connection ---> {$this->url}");
                 case 'sales':
-                    PutSalesJob::dispatch($responseData)->onQueue(env('QUEUE_LOW', 'low'));
+                    PutSalesJob::dispatch($responseData);
                     return Log::info("Success connection ---> {$this->url}");
                 case 'stocks':
-                    PutStocksJob::dispatch($responseData)->onQueue(env('QUEUE_LOW', 'low'));
+                    PutStocksJob::dispatch($responseData);
                     return Log::info("Success connection ---> {$this->url}");
                 }
             }

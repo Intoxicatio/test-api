@@ -23,7 +23,7 @@ class FetchService
         while ($maxPage > $page) {
             $page++;
             $urlu = $url . "&page={$page}";
-            ConnectionJob::dispatch($type, $urlu)->onQueue(env('QUEUE_HIGH', 'high'));
+            ConnectionJob::dispatch($type, $urlu);
         }
         return Log::info("Data start to fetching, total pages: {$page} url: {$url}");
     }

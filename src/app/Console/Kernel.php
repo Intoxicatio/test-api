@@ -20,22 +20,22 @@ class Kernel extends ConsoleKernel
         $schedule->command('fetch orders')
             ->twiceDaily(9, 21)
             ->timezone('Europe/moscow')
-            ->withoutOverlapping(15)
+            ->withoutOverlapping(480)
             ->onOneServer();
         $schedule->command('fetch incomes')
             ->twiceDaily(9, 21)
             ->timezone('Europe/moscow')
-            ->withoutOverlapping(15)
+            ->withoutOverlapping(480)
             ->onOneServer();
         $schedule->command('fetch sales')
             ->twiceDaily(9, 21)
             ->timezone('Europe/moscow')
-            ->withoutOverlapping(15)
+            ->withoutOverlapping(480)
             ->onOneServer();
         $schedule->command('fetch stocks')
             ->twiceDaily(9, 21)
             ->timezone('Europe/moscow')
-            ->withoutOverlapping(15)
+            ->withoutOverlapping(480)
             ->onOneServer();
     }
 
