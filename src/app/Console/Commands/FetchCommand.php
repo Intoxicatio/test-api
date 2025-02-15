@@ -55,8 +55,10 @@ class FetchCommand extends Command
             return $this->error('Invalid type');
         }
 
+        $this->info("Start to fetch {$type}...");
+
         $this->fetchService->fetch($type);
 
-        return $this->info("All {$type} start to fetching!\n");
+        return $this->info("All {$type} start fetching!\n");
     }
 }
