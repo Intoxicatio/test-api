@@ -16,7 +16,8 @@ class Account extends Authenticatable
     protected $fillable = [
         'name',
         'company_id',
-        'service_id'
+        'service_id',
+        'token_type_id'
     ];
 
     public function company()
@@ -54,7 +55,7 @@ class Account extends Authenticatable
             'token' => hash('sha256', $plainTextToken = Str::random(40)),
         ]);
 
-        $this->token = 'bearer';
+        $this->token_type_id = TokenType::where('name', 'bearer')->first()->id;
         $this->save();
 
         return ['token' => $plainTextToken];
@@ -71,7 +72,7 @@ class Account extends Authenticatable
             'key' => hash('sha256', $plainTextToken = Str::random(20))
         ]);
 
-        $this->token = 'api key';
+        $this->token_type_id = TokenType::where('name', 'api_key')->first()->id;;
         $this->save();
 
         return ['key' => $plainTextToken];
@@ -89,7 +90,7 @@ class Account extends Authenticatable
             'password' => hash('sha256', $password)
         ]);
 
-        $this->token = 'basic';
+        $this->token_type_id = TokenType::where('name', 'basic')->first()->id;
         $this->save();
 
         return [

@@ -17,8 +17,8 @@ class CreateAccountsTable extends Migration
             $table->id();
             $table->string('name')->unique();
             $table->unsignedBigInteger('company_id');
-            $table->string('token')->nullable();
             $table->unsignedBigInteger('service_id');
+            $table->unsignedBigInteger('token_type_id');
             $table->timestamps();
 
             $table->foreign('company_id')
@@ -31,7 +31,12 @@ class CreateAccountsTable extends Migration
                 ->on('services')
                 ->onDelete('cascade');
 
-            $table->unique(['token', 'name']);
+            $table->foreign('token_type_id')
+                ->references('id')
+                ->on('token_types')
+                ->onDelete('cascade');
+
+            $table->unique(['token_type_id', 'name']);
         });
     }
 

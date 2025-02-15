@@ -17,4 +17,9 @@ class Service extends Model
     {
         return $this->hasMany(Account::class, 'service_id', 'id');
     }
+
+    public function tokenTypes()
+    {
+        return $this->belongsToMany(TokenType::class, 'service_token_types', 'service_id', 'token_type_id');
+    }
 }

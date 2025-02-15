@@ -2,9 +2,9 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Account;
 use App\Models\Company;
 use App\Models\Service;
+use App\Models\TokenType;
 use App\Services\CreateService;
 use App\Services\TokenService;
 use Exception;
@@ -52,7 +52,7 @@ class CreateAccountCommand extends Command
 
             if ($companyName === 'Create new company...') {
                 $companyName = $this->ask('Enter company name');
-                CreateService::createCompany($companyName);
+                CreateService::company($companyName);
             } else {
                 break;
             }
@@ -63,7 +63,8 @@ class CreateAccountCommand extends Command
 
         $accountName = $this->ask('Enter account name');
 
-        $token = $this->choice('Choose the authentification type', ['basic', 'bearer', 'api_key']);
+        $tokenTypes = Service::where('name', $serviceName)->first()->tokenTypes()->pluck('name')->toArray();
+        $token = $this->choice('Choose the authentification type', $tokenTypes);
         $data['token'] = $token;
         if ($token === 'basic') {
             $this->info('Enter login and password');
@@ -74,21 +75,13 @@ class CreateAccountCommand extends Command
         DB::beginTransaction();
 
         try {
-
-            $account = CreateService::createAccount([
+            $account = CreateService::account([
                 'accountName' => $accountName,
                 'companyName' => $companyName,
-                'serviceName' => $serviceName
+                'serviceName' => $serviceName,
+                'tokenTypeId' => TokenType::where('name', $token)->first()->id
             ]);
-        } catch (Exception $exc) {
-            $this->error("First\n" . $exc);
-            DB::rollBack();
-        }
 
-        DB::commit();
-
-        DB::beginTransaction();
-        try {
             $data['account_id'] = $account->id;
 
             $auth = TokenService::generate($data);
@@ -99,6 +92,6 @@ class CreateAccountCommand extends Command
 
         DB::commit();
 
-        return 0;
+        return $this->info(json_encode($auth));
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use App\Models\ApiKey;
 use App\Models\BearerToken;
 use App\Models\LogPass;
+use App\Models\TokenType;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,12 +21,18 @@ class CheckAuthToken
      */
     public function handle(Request $request, Closure $next)
     {
+
         if ($request->bearerToken()) {
             $token = BearerToken::where('token', hash('sha256', $request->bearerToken()))->first();
 
             if ($token && $token->tokenable) {
-                Auth::setUser($token->tokenable);
-                return $next($request);
+                $tokenTypeId = $token->tokenable->token_type_id;
+                $availableRoutes = TokenType::find($tokenTypeId)->first()->services->pluck('name')->toArray();
+                $requestRoute = request()->route()->getName();
+                if (in_array($requestRoute, $availableRoutes)) {
+                    Auth::setUser($token->tokenable);
+                    return $next($request);
+                }
             }
         }
         if ($request->query('key') || $request->header('key')) {
@@ -33,8 +40,13 @@ class CheckAuthToken
             $apiKey = $request->query('key') ?: $request->header('key');
             $key = ApiKey::where('key', hash('sha256', $apiKey))->first();
             if ($key && $key->tokenable) {
-                Auth::setUser($key->tokenable);
-                return $next($request);
+                $tokenTypeId = $key->tokenable->token_type_id;
+                $availableRoutes = TokenType::find($tokenTypeId)->first()->services->pluck('name')->toArray();
+                $requestRoute = request()->route()->getName();
+                if (in_array($requestRoute, $availableRoutes)) {
+                    Auth::setUser($key->tokenable);
+                    return $next($request);
+                }
             }
         }
 
@@ -45,14 +57,19 @@ class CheckAuthToken
                 $decodedCredentials = base64_decode($encodedCredentials);
                 list($username, $password) = explode(':', $decodedCredentials, 2);
 
-                $user = LogPass::where('login', $username)->first();
-                if ($user && LogPass::where('login', $username)->where('password', hash('sha256', $password))->exists()) {
-                    Auth::setUser($user->tokenable);
-                    return $next($request);
+                $logPass = LogPass::where('login', $username)->first();
+                if ($logPass && LogPass::where('login', $username)->where('password', hash('sha256', $password))->exists()) {
+                    $tokenTypeId = $logPass->tokenable->token_type_id;
+                    $availableRoutes = TokenType::find($tokenTypeId)->first()->services->pluck('name')->toArray();
+                    $requestRoute = request()->route()->getName();
+                    if (in_array($requestRoute, $availableRoutes)) {
+                        Auth::setUser($logPass->tokenable);
+                        return $next($request);
+                    }
                 }
             }
-        }
 
-        return response()->json(['message' => 'Unauthorized'], 401);
+            return response()->json(['message' => 'Unauthorized'], 401);
+        }
     }
 }
