@@ -14,8 +14,6 @@ COPY supervisord.conf /etc/supervisord.conf
 COPY start.sh /usr/local/bin/start.sh
 RUN chmod +x /usr/local/bin/start.sh
 
-COPY root ./etc/crontabs
-
 EXPOSE 8000
 
 CMD ["/bin/sh", "-c", "/usr/local/bin/start.sh"]
