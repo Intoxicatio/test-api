@@ -18,26 +18,27 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
         $schedule->command('fetch orders')
-            ->twiceDaily(12, 22)
+            ->twiceDaily(13, 1)
             ->timezone('Europe/moscow')
             ->withoutOverlapping(480)
             ->onOneServer();
         $schedule->command('fetch incomes')
-            ->twiceDaily(12,22)
+            ->twiceDaily(13,1)
             ->timezone('Europe/moscow')
             ->withoutOverlapping(480)
             ->onOneServer();
         $schedule->command('fetch sales')
-            ->twiceDaily(12, 22)
+            ->twiceDaily(13, 1)
             ->timezone('Europe/moscow')
             ->withoutOverlapping(480)
             ->onOneServer();
         $schedule->command('fetch stocks')
-            ->twiceDaily(12, 22)
+            ->twiceDaily(13, 1)
             ->timezone('Europe/moscow')
             ->withoutOverlapping(480)
             ->onOneServer();
-        $schedule->command('tesst')->everyMinute();
+        $schedule->command('crond:log')->everyMinute();
+        $schedule->function();
     }
 
     /**
