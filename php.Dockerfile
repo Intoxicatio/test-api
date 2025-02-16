@@ -16,4 +16,4 @@ RUN chmod +x /usr/local/bin/start.sh
 
 EXPOSE 8000
 
-CMD ["/bin/sh", "-c", "/usr/local/bin/start.sh"]
+CMD ["/bin/sh", "-c", "php artisan octane:start  --server=swoole --host=0.0.0.0 --port=8000"]
