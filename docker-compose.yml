@@ -11,7 +11,7 @@ services:
       - "${SERVER_PORT}:8000"
     networks:
       - internal
-    # command: sh -c "composer create-project laravel/laravel:^8.x-dev . && composer require laravel/octane --with-all-dependencies"
+    command: sh -c "composer install"
 
   mysql:
     image: mysql:8.0
